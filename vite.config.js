@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/Safa_Studio/' // ضع اسم المستودع هنا
+  base: '/MyPortfolio/' // ضع اسم المستودع هنا
 })
