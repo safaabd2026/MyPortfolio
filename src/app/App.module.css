@@ -614,10 +614,9 @@
     background-color: var(--github-color);
 }
 
-.java:hover::after {
-    background-color: var(--java-color);
+.laravel:hover::after {
+    background-color: var(--laravel-color);
 }
-
 .cpp:hover::after {
     background-color: var(--cpp-color);
 }

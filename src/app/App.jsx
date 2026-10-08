@@ -13,14 +13,14 @@ import cv from '../assets/files/cv.pdf';
 // import icons
 import { FaReact } from "react-icons/fa";
 import { AiFillGithub, AiFillLinkedin, AiFillHtml5, AiOutlineEye } from "react-icons/ai";
-import { BiLogoGmail, BiLogoCss3, BiLogoJavascript, BiLogoRedux, BiLogoJava } from "react-icons/bi";
+import { BiLogoGmail, BiLogoCss3, BiLogoJavascript} from "react-icons/bi";
 import { BsFacebook, BsGit, BsPuzzle } from "react-icons/bs";
 import { TbBrandCpp } from "react-icons/tb";
-import { FaMobileAlt } from "react-icons/fa";
+import { FaMobileAlt,FaLaravel } from "react-icons/fa";
 import { RiSendPlaneFill } from "react-icons/ri";
 
 //import images
-import AlSafaLibrary from '../assets/images/AlSafaLibrary.png'
+import mahami from '../assets/images/mahami.png'
 
 // import style
 import style from './App.module.css';
@@ -58,9 +58,9 @@ const skills = [
 		cssName: "git"
 	},
 	{
-		name: 'java',
-		icon: <BiLogoJava size="25px" color="white" />,
-		cssName: "java"
+		name: 'Laravel',
+		icon: <FaLaravel size="25px" color="white" />,
+		cssName: "laravel"
 	},
 	{
 		name: 'C++',
@@ -76,11 +76,11 @@ const skills = [
 
 const projects = [
 	{
-		name: 'AlSafaLibrary',
-		link: 'https://safa-abdulhakim.github.io/Al-Safa-Library/',
-		github: 'https://github.com/Safa-abdulhakim/Al-Safa-Library',
-		description: 'Al-Safa Library is an interactive online platform designed to provide students and readers with seamless access to a wide range of educational and cultural books. Users can search for books by title, author, or subject, view detailed information including descriptions, authors, publishers, and publication dates, and save their favorite books for easy reference. The platform is built with modern technologies such as React and Bootstrap to ensure a smooth, responsive, and enjoyable user experience across all devices.',
-		image:AlSafaLibrary
+		name: 'Mahami',
+		link: 'https://mahami-upc8.onrender.com',
+		github: 'https://github.com/safaabd2026/Task_Manager',
+		description: 'Mahami is a web-based task management application designed to help users efficiently organize, manage, and track their daily tasks. The application allows users to create, edit, delete, and view tasks, set priorities and deadlines, track task status, and easily find tasks using search and filtering features. It also provides a dashboard with statistics to help users monitor task completion and progress. The application was developed using Laravel, PHP, MySQL, Blade, and Tailwind CSS, following the MVC architecture with authentication, authorization, and task ownership protection.',
+		image:mahami
 	},
 ]
 
@@ -91,20 +91,36 @@ function App() {
 	const [loading, setLoading] = useState(false);
 
 	const sendEmail = (e) => {
-		e.preventDefault();
-		setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-		setTimeout(function () {
-			emailjs.sendForm('service_vbg6sll', 'template_nz292aa', form.current, 'mEIXja5I_B4xJbCNz')
-				.then((result) => {
-					e.target.name.value = '';
-					e.target.email.value = '';
-					e.target.message.value = '';
-				});
-			setLoading(false);
-		}, 2000);
+    emailjs.send(
+        "service_ivnj5ko",
+        "template_k3m0dnf",
+        {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            message: e.target.message.value,
+        },
+        "5-uoUHMwLHiFikZeW"
+    )
+    .then((result) => {
+        console.log("SUCCESS:", result);
 
-	};
+        e.target.name.value = "";
+        e.target.email.value = "";
+        e.target.message.value = "";
+
+        alert("Message sent successfully");
+        setLoading(false);
+    })
+    .catch((error) => {
+        console.error("EMAILJS ERROR:", error);
+
+        alert("Failed to sent the message Please try again");
+        setLoading(false);
+    });
+};
 
 	return (
 		<div className={style.app}>
@@ -143,7 +159,10 @@ function App() {
 			<div id='Home' className={style.home}>
 				<div className={style["home-content"]}>
 					<h1>HEY, I'M Safa Abdulhakim</h1>
-					<p>A Web Front-end Developer Focuses on Building the Interface of Websites and Web Applications to Make the Site More Attractive.</p>
+					<p><b>Web Developer & Software Engineer</b><br />
+
+I build responsive and user-friendly web applications, combining modern front-end development with software engineering principles to create practical and engaging digital experiences.
+</p>
 					<a
 						href={cv}
 						download="cv-PDF-document"
@@ -164,16 +183,16 @@ function App() {
 					</div>
 				</div>
 				<div className={style["contact-nav"]}>
-					<a className={style.github} target="_blank" href='https://github.com/Safa-abdulhakim' >
+					<a className={style.github} target="_blank" rel="noopener noreferrer" href='https://github.com/Safaabd2026' >
 						<AiFillGithub size="30px" color='black' />
 					</a>
-					<a className={style.linkedin} target="_blank" href='https://www.linkedin.com/in/safa-abdulhakim/' >
+					<a className={style.linkedin} target="_blank" rel="noopener noreferrer" href='https://www.linkedin.com/in/safa-abdulhakim-71a391414' >
 						<AiFillLinkedin size="30px" color='black' />
 					</a>
-					<a className={style.gmail} target="_blank" href="mailto:safaabd2025@gmail.com?subject=SendMail&body=Description" >
+					<a className={style.gmail} target="_blank" rel="noopener noreferrer" href="mailto:safaabd2026@gmail.com?subject=SendMail&body=Description" >
 						<BiLogoGmail size="30px" color='black' />
 					</a>
-					<a className={style.facebook} target="_blank" href='https://www.facebook.com/profile.php?id=61579968512550' >
+					<a className={style.facebook} target="_blank" rel="noopener noreferrer" href='https://www.facebook.com/share/1PTCaxVVvB/' >
 						<BsFacebook size="30px" color='black' />
 					</a>
 				</div>
@@ -188,9 +207,7 @@ function App() {
 						<div className={style["about-info"]}>
 							<h3>Get to know me!</h3>
 							<p>
-								Hi! I'm learning Frontend Development and enjoy building websites and apps. 
-							 	This portfolio shows some of my practice projects. 
-								You can also follow me on <a href="https://github.com/Safa-abdulhakim" target="_blank" rel="noopener noreferrer">GitHub</a> to see what I’m working on.
+								Hi! I'm a Software Engineering graduate interested in web development, software engineering, and artificial intelligence. I enjoy building practical web applications and software solutions. This portfolio showcases some of my projects and work, reflecting my technical skills and interests.<a href="https://github.com/Safaabd2026" target="_blank" rel="noopener noreferrer">GitHub</a> to see what I’m working on.
 							</p>
 						</div>
 						<div className={style["my-skill"]}>
@@ -317,20 +334,20 @@ function App() {
 					<div className={style["footer-info"]}>
 						<div>
 							<h3>Safa Abdulhakim</h3>
-							<p>A Web Front-end Developer Focuses on Building the Interface of Websites and Web Applications to Make the Site More Attractive.</p>
+							<p>I build responsive and user-friendly web applications, combining modern front-end development with software engineering principles to create practical and engaging digital experiences.</p>
 						</div>
 						<div className={style.social}>
 							<div className="">
-								<a className={style.git} target="_blank" href='https://github.com/Safa-abdulhakim' >
+								<a className={style.git} target="_blank" rel="noopener noreferrer" href='https://github.com/Safaabd2026'>
 									<AiFillGithub size="30px" color='white' />
 								</a>
-								<a className={style.linkedin} target="_blank" href='https://www.linkedin.com/in/safa-abdulhakim/' >
+								<a className={style.linkedin} target="_blank" rel="noopener noreferrer" href='https://www.linkedin.com/in/safa-abdulhakim-71a391414'>
 									<AiFillLinkedin size="30px" color='white' />
 								</a>
-								<a className={style.gmail} target="_blank" href="mailto:safaabd2025@gmail.com?subject=SendMail&body=Description" >
+								<a className={style.gmail} target="_blank" rel="noopener noreferrer" href="mailto:safaabd2026@gmail.com?subject=SendMail&body=Description" >
 									<BiLogoGmail size="30px" color='white' />
 								</a>
-								<a className={style.facebook} target="_blank" href='https://www.facebook.com/profile.php?id=61579968512550' >
+								<a className={style.facebook} target="_blank" rel="noopener noreferrer" href='https://www.facebook.com/share/1PTCaxVVvB/' >
 									<BsFacebook size="30px" color='white' />
 								</a>
 							</div>
